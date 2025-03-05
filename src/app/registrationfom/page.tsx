@@ -42,7 +42,7 @@ const RegistrationForm = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/api/register`, { 
+      const response = await fetch(`${API_URL}/register`, { 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,6 +63,7 @@ const RegistrationForm = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <>

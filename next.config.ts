@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/:path*", // ✅ Frontend API Route
+        source: "/:path*", // ✅ Frontend API Route
         destination: "https://watch-and-earn-production.up.railway.app/:path*", // ✅ Backend ka Railway URL
       },
     ];
