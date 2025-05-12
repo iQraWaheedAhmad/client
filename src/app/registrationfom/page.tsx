@@ -1,4 +1,3 @@
-'use client'; 
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -17,7 +16,7 @@ const RegistrationForm = () => {
   const router = useRouter();
 
   // Backend URL for local testing
-  const API_URL = process.env.NEXT_PUBLIC_API_URL  ;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   // Password Validation Function
   const validatePassword = (password: string): string => {
@@ -44,7 +43,7 @@ const RegistrationForm = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/register`, { 
+      const response = await fetch(`${API_URL}/api/auth/register`, { 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +64,6 @@ const RegistrationForm = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <>

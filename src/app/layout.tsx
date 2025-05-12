@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-    <main className="pt-16">{children}</main> {/* Add padding to avoid content overlap */}
+    <main className="pt-16"> {children}  </main> {/* Add padding to avoid content overlap */}
     <Chat/>
    
 

@@ -11,7 +11,7 @@ export default function AccountsPage() {
     if (!showDepositInfo) {
       setShowDepositInfo(true); // Pehli click - Info show
     } else {
-      router.push('/deposit'); // Doosri click - Redirect to /deposit
+      router.push('/staking'); // Doosri click - Redirect to /deposit
     }
   };
 

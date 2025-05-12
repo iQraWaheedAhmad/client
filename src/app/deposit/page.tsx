@@ -1,5 +1,4 @@
 'use client';
-// components/DepositPage.jsx
 import { useState } from "react";
 import { CheckCircle } from "lucide-react";
 
@@ -11,7 +10,7 @@ export default function DepositPage() {
   const walletAddresses = {
     BTC: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
     ETH: "0x1234567890abcdef1234567890abcdef12345678",
-    USDT: "TLrWfYJzM6YxNkDzt9LxkJzF6s93d5cX3x",
+    USDT: "TJuZCvYANND2emRa4ssrWqpZswPFUaJVWQ", // ✅ Actual TRC20 Address
   };
 
   const handleDeposit = () => {
@@ -46,10 +45,17 @@ export default function DepositPage() {
           className="w-full p-3 rounded bg-gray-700 mb-4"
         />
 
-        <label className="block mb-2 font-semibold">Wallet Address</label>
-        <div className="bg-gray-700 p-3 rounded mb-4 break-words text-sm">
+        <label className="block mb-2 font-semibold">
+          Wallet Address {selectedCoin === "USDT" && "(TRC20)"}
+        </label>
+        <div className="bg-gray-700 p-3 rounded mb-1 break-words text-sm">
           {walletAddresses[selectedCoin]}
         </div>
+        {selectedCoin === "USDT" && (
+          <p className="text-xs text-yellow-400 mb-4">
+            Please send only USDT via TRC20 network.
+          </p>
+        )}
 
         <div className="text-center mb-4">
           <img

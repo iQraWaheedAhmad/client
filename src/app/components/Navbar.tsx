@@ -18,17 +18,18 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo + Links */}
         <div className="flex items-center space-x-4">
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2"> 
+            {/* Make sure P3.jpg is inside public/ folder */}
             <Image
               src="/P3.jpg"
               alt="Logo"
               width={48}
               height={48}
               className="rounded-md"
+              priority
+              unoptimized // optional: use this if image isn't displaying properly
             />
-          <span className="font-bold text-xl text-white">
-   WatchEarn
-  </span>
+            <span className="font-bold text-xl text-white">WatchEarn</span>
           </Link>
           <div className="hidden md:flex items-center space-x-4">
             {navbarLinks.map((link, index) => (
