@@ -42,7 +42,7 @@ const LoginForm = () => {
         }, 1000);
       } else {
         setTimeout(() => {
-          router.push("/video_route"); // Regular users
+          router.push("/staking"); // Regular users
         }, 1000);
       }
     } catch (error: any) {

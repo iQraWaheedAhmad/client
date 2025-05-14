@@ -90,14 +90,6 @@ function BinanceStaking() {
           </ul>
         </Step>
 
-        <div className="mt-8 text-sm text-gray-700">
-          <h3 className="text-lg font-medium">📧 Manual Submission</h3>
-          <p>
-            Send TXID and screenshot to:
-            <a href="mailto:imran@gmail.com" className="text-blue-600 underline ml-1">imran@gmail.com</a>
-          </p>
-          <p className="mt-1 text-xs">Include wallet address and TXID.</p>
-        </div>
         
         {/* Deposit Button */}
         <div className="mt-8 flex justify-center">

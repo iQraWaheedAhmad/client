@@ -29,8 +29,7 @@ function DepositPage() {
   const showSuccess = searchParams.get("success") === "true";
   
   const walletAddresses = {
-    BTC: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
-    ETH: "0x1234567890abcdef1234567890abcdef12345678",
+  
     USDT: "TJuZCvYANND2emRa4ssrWqpZswPFUaJVWQ", // Using the address from staking page
   };
 
@@ -146,8 +145,7 @@ function DepositPage() {
                 onChange={(e) => setSelectedCoin(e.target.value)}
                 className="w-full p-3 rounded bg-gray-700 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="BTC">Bitcoin (BTC)</option>
-                <option value="ETH">Ethereum (ETH)</option>
+                
                 <option value="USDT">Tether (USDT)</option>
               </select>
 

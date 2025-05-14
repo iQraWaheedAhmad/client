@@ -98,8 +98,8 @@ function ConfirmDeposit() {
       
       // Redirect after 3 seconds
       setTimeout(() => {
-        router.push('/deposit?success=true');
-      }, 3000);
+    router.push('/video_route');
+  }, 4000);
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
     } finally {
