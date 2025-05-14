@@ -1,34 +1,55 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+const plans = [
+  { priceUSD: 50, profitUSD: 2 },
+  { priceUSD: 100, profitUSD: 4 },
+  { priceUSD: 150, profitUSD: 6 },
+  { priceUSD: 250, profitUSD: 10 },
+  { priceUSD: 500, profitUSD: 20 },
+  { priceUSD: 1000, profitUSD: 40 },
+  { priceUSD: 1500, profitUSD: 60 },
+  { priceUSD: 2500, profitUSD: 100 },
+];
 
 export default function WithdrawPage() {
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [asset, setAsset] = useState('BTC');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [popupVisible, setPopupVisible] = useState(false);
   const [error, setError] = useState('');
 
+  const router = useRouter();
+
   const handleWithdraw = async () => {
+    if (!address || !amount) {
+      setError('Please enter address and amount');
+      return;
+    }
+
     setLoading(true);
-    setMessage('');
     setError('');
 
     try {
-      const res = await fetch('/api/withdraw', {
+      await fetch('/api/withdraw', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ address, amount, asset }),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error || 'Withdraw failed');
-      setMessage(data.message || 'Withdrawal successful!');
+      setPopupVisible(true);
       setAddress('');
       setAmount('');
+
+      // Redirect after 5 seconds
+      setTimeout(() => {
+        router.push('/');
+      }, 5000);
+
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || 'Withdraw failed');
     } finally {
       setLoading(false);
     }
@@ -59,14 +80,19 @@ export default function WithdrawPage() {
           placeholder="Enter wallet address"
         />
 
-        <label className="block mb-2 text-sm font-medium">Amount</label>
-        <input
-          type="number"
+        <label className="block mb-2 text-sm font-medium">Profit (USD)</label>
+        <select
           value={amount}
           onChange={e => setAmount(e.target.value)}
           className="w-full mb-4 p-2 rounded bg-gray-700 text-white"
-          placeholder="Enter amount"
-        />
+        >
+          <option value="">Select Profit</option>
+          {plans.map((plan, index) => (
+            <option key={index} value={plan.profitUSD}>
+              ${plan.profitUSD}
+            </option>
+          ))}
+        </select>
 
         <button
           onClick={handleWithdraw}
@@ -76,9 +102,18 @@ export default function WithdrawPage() {
           {loading ? 'Processing...' : 'Withdraw'}
         </button>
 
-        {message && <p className="text-green-400 mt-4">{message}</p>}
         {error && <p className="text-red-400 mt-4">{error}</p>}
       </div>
+
+      {/* POPUP - Only message, no confirmation */}
+      {popupVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-gray-800 p-6 rounded text-center max-w-sm">
+            <h2 className="text-xl font-semibold mb-4">Withdrawal is in process...</h2>
+            <p className="text-gray-300">Your request is being verified. You will receive your withdrawal within 12 hours.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,6 +1,24 @@
+'use client';
 import Head from 'next/head';
+import { useState } from 'react';
 
 export default function BinanceStaking() {
+  const walletAddress = "TJuZCvYANND2emRa4ssrWqpZswPFUaJVWQ";
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(walletAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const Step = ({ title, children, color }) => (
+    <div className={`bg-white shadow rounded-lg p-4 border-l-4 mt-6 ${color}`}>
+      <h2 className="text-xl font-semibold mb-2">{title}</h2>
+      <div className="text-gray-700 text-sm space-y-2">{children}</div>
+    </div>
+  );
+
   return (
     <>
       <Head>
@@ -8,70 +26,68 @@ export default function BinanceStaking() {
         <meta name="description" content="Step-by-step guide to stake USDT (TRC20) using Binance Wallet and start earning daily." />
       </Head>
 
-      <div className="max-w-3xl mx-auto px-4 py-10 text-gray-800">
-        <h1 className="text-3xl font-bold mb-6 text-center">How to Join Our USDT (TRC20) Staking Program</h1>
-        <p className="mb-8 text-center text-lg">Follow these steps to stake USDT (TRC20) and earn daily profits.</p>
+      <main className="max-w-xl mx-auto px-4 py-8 text-gray-900">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4">🚀 Join USDT (TRC20) Staking</h1>
+        <p className="text-center text-sm sm:text-base mb-8">Simple steps to start earning daily rewards.</p>
 
-        {/* Step 1 */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">Step 1: Copy the Wallet Address</h2>
-          <p>Send USDT (TRC20) to the following address:</p>
-          <code className="block bg-gray-100 text-sm p-3 mt-2 rounded">
-            TJuZCvYANND2emRa4ssrWqpZswPFUaJVWQ
-          </code>
-        </div>
+        <Step title="📥 Step 1: Copy Wallet Address" color="border-blue-500">
+          <p>Send your USDT (TRC20) to:</p>
+          <div className="flex flex-wrap items-center gap-2 mt-2">
+            <code className="bg-gray-100 px-2 py-1 rounded text-blue-600 font-mono break-all">{walletAddress}</code>
+            <button onClick={handleCopy} className="bg-blue-600 text-white px-3 py-1 rounded text-sm">
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
+        </Step>
 
-        {/* Step 2 */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">Step 2: Open Your Binance App or Wallet</h2>
-          <ol className="list-decimal ml-5 space-y-2">
-            <li>Open Binance app or use your Tron-compatible wallet (e.g., Trust Wallet, TronLink).</li>
-            <li>Ensure your wallet is funded with USDT and the network is set to <strong>TRC-20</strong>.</li>
-          </ol>
-        </div>
-
-        {/* Step 3 */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">Step 3: Send USDT</h2>
-          <ol className="list-decimal ml-5 space-y-2">
-            <li>Tap on <strong>"Withdraw" or "Send"</strong> in your wallet.</li>
-            <li>Paste the address: 
-              <code className="bg-gray-100 px-1 rounded ml-1">TJuZCvYANND2emRa4ssrWqpZswPFUaJVWQ</code>
-            </li>
-            <li>Enter the amount you want to stake (e.g., 100 USDT).</li>
-            <li>Select <strong>TRC20</strong> as the network.</li>
-            <li>Review and confirm the transaction.</li>
-          </ol>
-        </div>
-
-        {/* Step 4 */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">Step 4: Send Us the Transaction Hash (TXID)</h2>
-          <ol className="list-decimal ml-5 space-y-2">
-            <li>Once the transfer is complete, copy the transaction hash (TXID) from your wallet or TronScan.</li>
-            <li>Send the TXID to us via our platform or contact channel.</li>
-          </ol>
-          <p className="mt-2">We will verify your deposit manually.</p>
-        </div>
-
-        {/* Step 5 */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-2">Step 5: Start Earning</h2>
-          <p>After verification, you will start receiving daily profits (e.g., $2/day for 100 USDT).</p>
-          <p>Your initial deposit is locked for 30 days. You can withdraw it after that period.</p>
-        </div>
-
-        {/* Notes */}
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
-          <h3 className="text-lg font-bold mb-2">Important Notes</h3>
-          <ul className="list-disc ml-5 space-y-1">
-            <li>Only send <strong>USDT via TRC20</strong>. Sending via the wrong network may result in loss of funds.</li>
-            <li>Never share your wallet's seed phrase.</li>
-            <li>Withdrawals before 30 days are not allowed.</li>
-            <li>Keep your TXID for future reference.</li>
+        <Step title="📱 Step 2: Open Wallet" color="border-green-500">
+          <ul className="list-disc ml-5">
+            <li>Use Binance, Trust Wallet, or TronLink.</li>
+            <li>Ensure USDT is on <strong>TRC-20</strong> network.</li>
           </ul>
+        </Step>
+
+        <Step title="💸 Step 3: Send USDT" color="border-purple-500">
+          <ul className="list-decimal ml-5">
+            <li>Tap "Withdraw" or "Send".</li>
+            <li>Paste address: <code className="bg-gray-100 px-1 rounded text-blue-600 font-mono">{walletAddress}</code></li>
+            <li>Enter amount (e.g., 100 USDT).</li>
+            <li>Choose <strong>TRC20</strong> network.</li>
+            <li>Confirm transaction.</li>
+          </ul>
+        </Step>
+
+        <Step title="🔁 Step 4: Send TXID" color="border-yellow-500">
+          <ul className="list-decimal ml-5">
+            <li>Copy transaction hash (TXID).</li>
+            <li>Send TXID via form or email.</li>
+          </ul>
+          <p className="text-xs text-gray-500">Every deposit is manually verified.</p>
+        </Step>
+
+        <Step title="🎉 Step 5: Start Earning" color="border-red-500">
+          <p>Daily reward example: $2 per 100 USDT. Withdraw after 12h. Deposit locked for 30 days.</p>
+        </Step>
+
+        <Step title="⚠️ Important Notes" color="border-yellow-400">
+          <ul className="list-disc ml-5 text-sm">
+            <li>Only send USDT via <strong>TRC20</strong>.</li>
+            <li>Never share your wallet's seed phrase.</li>
+            <li>Withdraw only after 30 days.</li>
+            <li>Keep TXID safe for records.</li>
+          </ul>
+        </Step>
+
+        <div className="mt-8 text-sm text-gray-700">
+          <h3 className="text-lg font-medium">📧 Manual Submission</h3>
+          <p>
+            Send TXID and screenshot to:
+            <a href="mailto:imran@gmail.com" className="text-blue-600 underline ml-1">imran@gmail.com</a>
+          </p>
+          <p className="mt-1 text-xs">Include wallet address and TXID.</p>
         </div>
-      </div>
+      </main>
     </>
   );
 }
+8
